@@ -16,7 +16,7 @@
 
 package com.lishid.orebfuscator.hook;
 
-import com.lishid.orebfuscator.threading.OrebfuscatorThreadCalculation;
+import com.lishid.orebfuscator.threading.OrebfuscatorScheduler;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.NetServerHandler;
@@ -38,14 +38,14 @@ public class OrebfuscatorNetServerHandler extends NetServerHandlerProxy
         if (packet instanceof Packet51MapChunk)
         {
             // Obfuscate packet
-            OrebfuscatorThreadCalculation.SyncThreads();
-            OrebfuscatorThreadCalculation.Queue((Packet51MapChunk) packet, this.getPlayer());
+        	OrebfuscatorScheduler.getScheduler().SyncThreads();
+        	OrebfuscatorScheduler.getScheduler().Queue((Packet51MapChunk) packet, this.getPlayer());
         }
         else if (packet instanceof Packet56MapChunkBulk)
         {
             // Obfuscate packet
-            OrebfuscatorThreadCalculation.SyncThreads();
-            OrebfuscatorThreadCalculation.Queue((Packet56MapChunkBulk) packet, this.getPlayer());
+        	OrebfuscatorScheduler.getScheduler().SyncThreads();
+        	OrebfuscatorScheduler.getScheduler().Queue((Packet56MapChunkBulk) packet, this.getPlayer());
         }
         else
         {
