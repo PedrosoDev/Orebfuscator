@@ -83,8 +83,14 @@ public class Orebfuscator extends JavaPlugin
         pm.registerEvents(this.entityListener, this);
         pm.registerEvents(this.blockListener, this);
         
+        // ProtocolLib is compatible with Spout
+        if (pm.getPlugin("ProtocolLib") != null) 
+        {
+        	protocolHook = new ProtocolLibHook();
+        	protocolHook.register(this);
+        }
         // Using Spout
-        if (pm.getPlugin("Spout") != null)
+        else if (pm.getPlugin("Spout") != null)
         {
             // Try to load spout 10 times...
             Throwable t = null;
@@ -109,11 +115,6 @@ public class Orebfuscator extends JavaPlugin
                 t.printStackTrace();
             }
         } 
-        else if (pm.getPlugin("ProtocolLib") != null) 
-        {
-        	protocolHook = new ProtocolLibHook();
-        	protocolHook.register(this);
-        }
         else 
         {
             // Non-spout method, use Player Join to replace NetServerHandler
